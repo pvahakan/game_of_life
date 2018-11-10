@@ -2,6 +2,8 @@
 
 import pygame
 import numpy as np
+import os
+import time
 
 display_width = 800
 display_height = 600
@@ -39,6 +41,20 @@ def look_around(M, i, j):
         )
     return sum
 
+def console_print(M):
+    for i in range(len(M)):
+        for j in range(len(M[0])):
+            if i == 0 or j == 0:
+                print("# ", end="")
+            elif i == len(M) - 1 or j == len(M[0]) - 1:
+                print("# ", end="")
+            elif M[i][j] == 1:
+                print("x ", end="")
+            else:
+                print("  ", end="")
+
+        print()
+
 def logic(M):
     for i in range(1, len(y)-1):
         for j in range(1, len(x)-1):
@@ -72,6 +88,11 @@ def main():
 
 
 if __name__ == "__main__":
-    board = test_init_board(board)
-    print(board)
-    logic(board)
+    # board = np.array([[1,1,1],[2,2,2],[3,3,3]])
+    i = 0
+    while i < 10:
+        os.system("clear")
+        board = test_init_board(board)
+        console_print(board)
+        i += 1
+        time.sleep(1)
