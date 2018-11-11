@@ -42,6 +42,9 @@ def look_around(M, i, j):
     return sum
 
 def console_print(M):
+    """
+    Function to print game in console.
+    """
     for i in range(len(M)):
         for j in range(len(M[0])):
             if i == 0 or j == 0:
@@ -56,9 +59,27 @@ def console_print(M):
         print()
 
 def logic(M):
+    """
+    Game logic.
+    """
+    copy = M.copy()
     for i in range(1, len(y)-1):
         for j in range(1, len(x)-1):
-            print(look_around(M, i, j))
+            surroundings = look_around(M, i, j)
+
+            if M[i][j] == 0:
+                # unpopulated cells
+                if surroundings == 3:
+                    copy[i][j] = 1
+
+            elif M[i][j] == 1:
+                # populated cells
+                if surroundings < 2 or surroundings > 3:
+                    copy[i][j] = 0
+                else:
+                    copy[i][j] = 1
+
+    return copy
 
 def main():
     # Initialize
@@ -90,9 +111,24 @@ def main():
 if __name__ == "__main__":
     # board = np.array([[1,1,1],[2,2,2],[3,3,3]])
     i = 0
+    board = test_init_board(board)
+    # Glider
+    # board[2][3] = 1
+    # board[3][4] = 1
+    # board[4][2] = 1
+    # board[4][3] = 1
+    # board[4][4] = 1
+    # Small exploder
+    # board[4][6] = 1
+    # board[5][5] = 1
+    # board[5][6] = 1
+    # board[5][7] = 1
+    # board[6][5] = 1
+    # board[6][7] = 1
+    # board[7][6] = 1
     while i < 10:
         os.system("clear")
-        board = test_init_board(board)
         console_print(board)
+        board = logic(board)
         i += 1
-        time.sleep(1)
+        time.sleep(0.5)
