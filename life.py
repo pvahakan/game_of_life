@@ -72,18 +72,17 @@ class Life():
         """
         Game logic.
         """
-        M = self.board
-        copy = M.copy()
+        copy = self.board.copy()
         for i in range(1, self.y-1):
             for j in range(1, self.x-1):
                 surroundings = Life.look_around(self, i, j)
 
-                if M[i][j] == 0:
+                if self.board[i][j] == 0:
                     # unpopulated cells
                     if surroundings == 3:
                         copy[i][j] = 1
 
-                elif M[i][j] == 1:
+                elif self.board[i][j] == 1:
                     # populated cells
                     if surroundings < 2 or surroundings > 3:
                         copy[i][j] = 0
