@@ -31,13 +31,15 @@ class Life():
         """
         Initializes board to small exploder
         """
-        self.board[4][6] = 1
-        self.board[5][5] = 1
-        self.board[5][6] = 1
-        self.board[5][7] = 1
-        self.board[6][5] = 1
-        self.board[6][7] = 1
-        self.board[7][6] = 1
+        cent_x = int(len(self.board) / 2)
+        cent_y = int(len(self.board[0]) / 2)
+        self.board[cent_x, cent_y - 1] = 1
+        self.board[cent_x - 1, cent_y] = 1
+        self.board[cent_x, cent_y] = 1
+        self.board[cent_x + 1, cent_y] = 1
+        self.board[cent_x - 1, cent_y + 1] = 1
+        self.board[cent_x + 1, cent_y + 1] = 1
+        self.board[cent_x, cent_y + 2] = 1
 
     def look_around(self, i, j):
         """
